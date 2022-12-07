@@ -25,12 +25,12 @@ print(output2)
 
 
 # Part 1 alternative WIP
-output = 0
+output3 = 0
 for line in input:
     sectors = line.split(",")
     FirstElf = sectors[0].split("-")
     SecondElf = sectors[1].split("-")
     if (set(FirstElf) & set(SecondElf)):
-        output += 1
+        output3 += 1
 
-print(output) # outputting 312, should be 444, don't know why
+print(output3) # outputting 312, should be 444, don't know why
