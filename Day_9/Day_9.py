@@ -1,4 +1,4 @@
-input = open("input.txt").read().strip().split("\n")
+input = open("input.txt").read().strip()
 
 # print(input)
 # Part 1
@@ -25,9 +25,36 @@ def TailFollow(HeadPosition):
     return TailPosition
 
 
-HeadOutput = HeadMove(input)
+HeadOutput = HeadMove(input.split("\n"))
 for _ in range(9):
     Output = TailFollow(HeadOutput)
 
 print(len(set(Output)))
 
+# Part 2
+def HeadMove2(moves):
+    positions = [(0, 0)]
+    for move in moves:
+        di, n = move.split()
+        dx, dy = direction[di]
+        for _ in range(int(n)):
+            positions.append((positions[-1][0] + dx, positions[-1][1] + dy))
+    
+    return positions
+
+def follow_head(positions):
+    followed_positions = [(0, 0)]
+    kx, ky = 0, 0
+    for px, py in positions:
+        if abs(px - kx) > 1 or abs(py - ky) > 1:
+            kx = kx + ((px > kx) - (kx > px))
+            ky = ky + ((py > ky) - (ky > py))
+        followed_positions.append((kx, ky))
+        
+    return followed_positions
+
+h2 = HeadMove2(input.split("\n"))
+for _ in range(9):
+    h2 = follow_head(h2)
+    
+print(len(set(h2)))
